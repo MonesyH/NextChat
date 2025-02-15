@@ -348,6 +348,12 @@ export function getHeaders(ignoreHeaders: boolean = false) {
     );
   }
 
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const omemetisToken = urlParams.get("omemetis");
+
+  headers["OME-METIS-Authorization"] = omemetisToken || "";
+
   return headers;
 }
 
