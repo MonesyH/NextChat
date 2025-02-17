@@ -354,6 +354,8 @@ export function getHeaders(ignoreHeaders: boolean = false) {
 
   const omemetisToken = urlParams.get("omemetis");
 
+  console.log(appConfig.omemetis, "appConfig.omemetis");
+
   headers["OME-METIS-Authorization"] =
     appConfig.omemetis || omemetisToken || "";
 
