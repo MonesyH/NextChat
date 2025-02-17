@@ -13,6 +13,7 @@ export default async function App() {
     const handleMessage = (event) => {
       // 确保消息来自信任的源
       if (!event.origin.includes("omeoffice")) {
+        console.log("not found");
         return; // 如果不是信任的源，忽略消息
       }
 
