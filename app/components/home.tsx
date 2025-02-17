@@ -264,6 +264,7 @@ export function Home() {
     window.parent.postMessage("omemetis is ready", "*");
 
     const handleMessage = (event) => {
+      console.log(event, "父发送");
       // 确保消息来自信任的源
       if (!event.origin.includes("omeoffice")) {
         console.log("not found");
