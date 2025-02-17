@@ -258,6 +258,33 @@ export function Home() {
     initMcp();
   }, []);
 
+  const appConfig = useAppConfig();
+
+  useEffect(() => {
+    window.parent.postMessage("omemetis is ready", "*");
+
+    const handleMessage = (event) => {
+      // 确保消息来自信任的源
+      if (!event.origin.includes("omeoffice")) {
+        console.log("not found");
+        return; // 如果不是信任的源，忽略消息
+      }
+
+      // 处理消息
+      if (event.data.param2 !== null || event.data.param2 !== undefined)
+        appConfig.setOmeMetis(event.data.param2);
+      console.log("Received message from parent:", event.data.param2);
+    };
+
+    // 添加事件监听器
+    window.addEventListener("message", handleMessage);
+
+    // 清理事件监听器：组件卸载时移除事件监听
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
+
   if (!useHasHydrated()) {
     return <Loading />;
   }
