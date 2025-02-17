@@ -9,19 +9,21 @@ const serverConfig = getServerSideConfig();
 export default async function App() {
   const appConfig = useAppConfig();
 
-  useEffect(() => {
-    const handleMessage = (event) => {
-      // 确保消息来自信任的源
-      if (!event.origin.includes("omeoffice")) {
-        console.log("not found");
-        return; // 如果不是信任的源，忽略消息
-      }
+  const handleMessage = (event) => {
+    // 确保消息来自信任的源
+    if (!event.origin.includes("omeoffice")) {
+      console.log("not found");
+      return; // 如果不是信任的源，忽略消息
+    }
 
-      // 处理消息
-      if (event.data.param2 !== null || event.data.param2 !== undefined)
-        appConfig.setOmeMetis(event.data.param2);
-      console.log("Received message from parent:", event.data.param2);
-    };
+    // 处理消息
+    if (event.data.param2 !== null || event.data.param2 !== undefined)
+      appConfig.setOmeMetis(event.data.param2);
+    console.log("Received message from parent:", event.data.param2);
+  };
+
+  useEffect(() => {
+    window.parent.postMessage("omemetis is ready", "*");
 
     // 添加事件监听器
     window.addEventListener("message", handleMessage);
