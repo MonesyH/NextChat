@@ -104,6 +104,8 @@ export const DEFAULT_CONFIG = {
     temperature: 0.9,
     voice: "alloy" as Voice,
   },
+
+  omemetis: "",
 };
 
 export type ChatConfig = typeof DEFAULT_CONFIG;
@@ -165,7 +167,14 @@ export const useAppConfig = createPersistStore(
   { ...DEFAULT_CONFIG },
   (set, get) => ({
     reset() {
-      set(() => ({ ...DEFAULT_CONFIG }));
+      const { omemetis } = get();
+
+      set(() => ({ ...DEFAULT_CONFIG, omemetis }));
+    },
+    setOmeMetis(str: string) {
+      set(() => ({
+        omemetis: str,
+      }));
     },
 
     mergeModels(newModels: LLMModel[]) {
