@@ -264,17 +264,14 @@ export function Home() {
     window.parent.postMessage("omemetis is ready", "*");
 
     const handleMessage = (event: any) => {
-      console.log(event, "父发送");
       // 确保消息来自信任的源
       if (!event.origin.includes("omeoffice")) {
-        console.log("not found");
         return; // 如果不是信任的源，忽略消息
       }
 
       // 处理消息
       if (event.data.param2 !== null || event.data.param2 !== undefined)
         appConfig.setOmeMetis(event.data.param2);
-      console.log("Received message from parent:", event.data.param2);
     };
 
     // 添加事件监听器
