@@ -464,6 +464,7 @@ export const useChatStore = createPersistStore(
         if (cloneModelConfig.model.startsWith('MetisGPT')) {
             cloneModelConfig.model = 'tgi';
             cloneModelConfig.top_p = 0.8;
+            cloneModelConfig.max_token = 4000;
         }
         console.log("cloneModelConfig", cloneModelConfig);
         api.llm.chat({
