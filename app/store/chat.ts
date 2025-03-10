@@ -458,9 +458,17 @@ export const useChatStore = createPersistStore(
 
         const api: ClientApi = getClientApi(modelConfig.providerName);
         // make request
+
+        const cloneModelConfig = { ...modelConfig }; // 克隆 modelConfig
+
+        if (cloneModelConfig.model.startsWith('MetisGPT')) {
+            cloneModelConfig.model = 'tgi';
+            cloneModelConfig.top_p = 0.8;
+        }
+        
         api.llm.chat({
           messages: sendMessages,
-          config: { ...modelConfig, stream: true },
+          config: { ...cloneModelConfig, stream: true, top_p: 0.8 },
           onUpdate(message) {
             botMessage.streaming = true;
             if (message) {
