@@ -198,7 +198,8 @@ export class ChatGPTApi implements LLMApi {
     const isDalle3 = _isDalle3(options.config.model);
     const isO1OrO3 =
       options.config.model.startsWith("o1") ||
-      options.config.model.startsWith("o3");
+      options.config.model.startsWith("o3") ||
+      options.config.model.startsWith("hi");
     if (isDalle3) {
       const prompt = getMessageTextContent(
         options.messages.slice(-1)?.pop() as any,
