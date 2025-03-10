@@ -464,12 +464,12 @@ export const useChatStore = createPersistStore(
         if (cloneModelConfig.model.startsWith('MetisGPT')) {
             cloneModelConfig.model = 'tgi';
             cloneModelConfig.top_p = 0.8;
-            cloneModelConfig.max_token = 4000;
+            cloneModelConfig.max_tokens = 4000;
         }
         console.log("cloneModelConfig", cloneModelConfig);
         api.llm.chat({
           messages: sendMessages,
-          config: { ...cloneModelConfig, stream: true, top_p: 0.8, max_token: 4000 },
+          config: { ...cloneModelConfig, stream: true, top_p: 0.8, max_tokens: 4000 },
           onUpdate(message) {
             botMessage.streaming = true;
             if (message) {
