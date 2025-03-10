@@ -469,7 +469,7 @@ export const useChatStore = createPersistStore(
         console.log("cloneModelConfig", cloneModelConfig);
         api.llm.chat({
           messages: sendMessages,
-          config: { ...cloneModelConfig, stream: true, top_p: 0.8, max_tokens: 4000 },
+          config: { ...cloneModelConfig, stream: true, top_p: 0.8 },
           onUpdate(message) {
             botMessage.streaming = true;
             if (message) {
