@@ -465,10 +465,10 @@ export const useChatStore = createPersistStore(
             cloneModelConfig.model = 'tgi';
             cloneModelConfig.top_p = 0.8;
         }
-        
+        console.log("cloneModelConfig", cloneModelConfig);
         api.llm.chat({
           messages: sendMessages,
-          config: { ...cloneModelConfig, stream: true, top_p: 0.8 },
+          config: { ...cloneModelConfig, stream: true, top_p: 0.8, max_token: 4000 },
           onUpdate(message) {
             botMessage.streaming = true;
             if (message) {
